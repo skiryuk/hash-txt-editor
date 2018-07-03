@@ -123,5 +123,12 @@
       }
     }
   },
-  "defaultProject": "hash-txt-editor"
+  "defaultProject": "hash-txt-editor",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": false
+      }
+    }
+  }
 }
