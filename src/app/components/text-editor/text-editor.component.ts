@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ProdTagsDataService} from '../../services/prod-tags-data.service';
 import {HashTagModel} from '../../models/hash-tag.model';
-import {TestTagsDataService} from '../../services/test-tags-data.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -16,7 +15,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
   expTag: RegExp = /(#[A-Za-zА-Яа-я\d]+)(\s|&nbsp;|<div>|<\/span>|(?=#)|(?=<\/div>[\d\D]+))+/gm;
   tagsData: Array<HashTagModel> = [];
 
-  constructor(protected tagsDataService: TestTagsDataService) { }
+  constructor(protected tagsDataService: ProdTagsDataService) { }
 
   ngOnInit() {
     this.tagsDataService.getTagsData()
