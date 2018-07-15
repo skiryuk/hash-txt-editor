@@ -288,6 +288,10 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
     }
   }
 
+  isKnownHashTag(hashTag: string): boolean {
+    return this.tagsData.map(tag => tag.HashTag).indexOf(hashTag) >= 0;
+  }
+
   convertTags() {
     const editorDiv = <HTMLDivElement>this.editor.nativeElement;
     const content = editorDiv.innerHTML.replace(/&nbsp;/gm, ' ');
@@ -325,15 +329,17 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
     rng.setStart(node, position);
     // Ставим правую границу по позиции первого вхождения элемента + длина текста
     rng.setEnd(node, position + tagContent.length);
-    // Создаем плашку
-    const hashTagElement = document.createElement('span');
-    hashTagElement.className = 'hash-tag';
 
-    // Обернем созданный Range в плашку
-    rng.surroundContents(hashTagElement);
-    // Убираем хэштег
-    hashTagElement.innerHTML = tagContent.replace('#', '<span class="hash-tag-sign">#</span>');
+    if (this.isKnownHashTag(tagContent)) {
+      // Создаем плашку
+      const hashTagElement = document.createElement('span');
+      hashTagElement.className = 'hash-tag';
 
+      // Обернем созданный Range в плашку
+      rng.surroundContents(hashTagElement);
+      // Убираем хэштег
+      hashTagElement.innerHTML = tagContent.replace('#', '<span class="hash-tag-sign">#</span>');
+    }
     rng.collapse(false);
   }
 
