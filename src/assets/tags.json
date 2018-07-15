@@ -1,0 +1,27 @@
+[
+  {
+    "Id": 1,
+    "HashTag": "#msk",
+    "Title": "Москва"
+  },
+  {
+    "Id": 2,
+    "HashTag": "#spb",
+    "Title": "Санкт-Петербург"
+  },
+  {
+    "Id": 3,
+    "HashTag": "#rnd",
+    "Title": "Ростов-на-Дону"
+  },
+  {
+    "Id": 4,
+    "HashTag": "#kzn",
+    "Title": "Казань"
+  },
+  {
+    "Id": 5,
+    "HashTag": "#vlg",
+    "Title": "Волгоград"
+  }
+]
