@@ -263,7 +263,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
     this.insertElementAtCursor(hashTagElement);
   }
 
-  onMouseDownTagItem(event: MouseEvent) {
+  saveFocus(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
   }

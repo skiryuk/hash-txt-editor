@@ -1,11 +1,11 @@
 
 <div class="text-editor-panel">
-  <div class="left-panel">
+  <div class="left-panel" (mousedown)="saveFocus($event)">
     <div class="editor" contenteditable="true" [innerHTML]="content" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" (mouseup)="onMouseUp($event)" #editor></div>
   </div>
-  <div class="right-panel">
-    <div class="tags-list" (mousedown)="onMouseDownTagItem($event)">
-      <div class="tag-item" *ngFor="let item of tagsData" (click)="onSelectTagItem(item)" (mousedown)="onMouseDownTagItem($event)">{{item.Title}}</div>
+  <div class="right-panel" (mousedown)="saveFocus($event)">
+    <div class="tags-list" (mousedown)="saveFocus($event)">
+      <div class="tag-item" *ngFor="let item of tagsData" (click)="onSelectTagItem(item)" (mousedown)="saveFocus($event)">{{item.Title}}</div>
     </div>
   </div>
 </div>
