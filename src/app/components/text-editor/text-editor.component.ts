@@ -147,6 +147,14 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
         this.backspaceNode(currentSelection.anchorNode.childNodes[currentSelection.anchorOffset - 1]);
       }
     } else {
+      // Для Opera
+      if (this.isHashTagElement(currentSelection.anchorNode.parentNode)) {
+        currentSelection.anchorNode.parentNode.parentNode.removeChild(currentSelection.anchorNode.parentNode);
+      }
+      if (this.isHashTagElement(currentSelection.focusNode.parentNode)) {
+        currentSelection.focusNode.parentNode.parentNode.removeChild(currentSelection.focusNode.parentNode);
+      }
+      //
       this.setCursorInPreviousElement(currentSelection);
     }
   }
@@ -361,7 +369,7 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
     if (node && node.textContent.trim() !== '') {
       return node;
     } else {
-      if (node.previousSibling) {
+      if (node && node.previousSibling) {
         return this.getNearestNonEmptyNode(node.previousSibling);
       } else {
         return node;
@@ -377,9 +385,14 @@ export class TextEditorComponent implements OnInit, AfterViewInit {
       currentRange.startContainer.parentNode.parentNode.removeChild(currentRange.startContainer.parentNode);
       const newRange = document.createRange();
       const nearestNode = this.getNearestNonEmptyNode(currentRange.startContainer.parentNode.previousSibling);
-      newRange.setStart(nearestNode, nearestNode.textContent.length);
-      currentSelection.removeAllRanges();
-      currentSelection.addRange(newRange);
+      if (nearestNode) {
+        newRange.setStart(nearestNode, nearestNode.textContent.length);
+        currentSelection.removeAllRanges();
+        currentSelection.addRange(newRange);
+      } else {
+        // Для Firefox
+        currentSelection.collapseToStart();
+      }
     }
   }
 

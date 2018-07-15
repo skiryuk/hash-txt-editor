@@ -1,6 +1,6 @@
 
 <div class="text-editor-panel">
-  <div class="left-panel" (mousedown)="saveFocus($event)">
+  <div class="left-panel">
     <div class="editor" contenteditable="true" [innerHTML]="content" (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" (mouseup)="onMouseUp($event)" #editor></div>
   </div>
   <div class="right-panel" (mousedown)="saveFocus($event)">
